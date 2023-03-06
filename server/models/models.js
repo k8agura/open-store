@@ -20,7 +20,6 @@ const Consultation = sequelize.define('consultation',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     price: {type: DataTypes.INTEGER, allowNull: false},
-    rating: {type: DataTypes.INTEGER, defaultValue: 0},
     img: {type: DataTypes.STRING, allowNull:false}
 })
 
@@ -32,11 +31,6 @@ const Type = sequelize.define('type', {
 const Author = sequelize.define('author', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false}
-})
-
-const Rating = sequelize.define('rating', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    rate: {type: DataTypes.INTEGER, allowNull: false}
 })
 
 const ConsultationInfo = sequelize.define('consultation_info',{
@@ -52,9 +46,6 @@ const TypeAuthor = sequelize.define('type_author', {
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
-User.hasMany(Rating)
-Rating.belongsTo(User)
-
 Basket.hasMany(BasketConsultation)
 BasketConsultation.belongsTo(Basket)
 
@@ -63,9 +54,6 @@ Consultation.belongsTo(Type)
 
 Author.hasMany(Consultation)
 Consultation.belongsTo(Author)
-
-Consultation.hasMany(Rating)
-Rating.belongsTo(Consultation)
 
 Consultation.hasMany(BasketConsultation)
 BasketConsultation.belongsTo(Consultation)
@@ -85,7 +73,6 @@ module.exports = {
     BasketConsultation,
     Consultation,
     ConsultationInfo,
-    Rating,
     Type,
     Author,
     TypeAuthor
